@@ -55,8 +55,8 @@
             row = "<th>"+X[i]+"</th>";
 
             for(let j=0;j<L.length;j++){
-                P[i,j] = Math.pow(Math.E,-L[j]) * (Math.pow(L[j],X[i]) / faktor(X[i])).toFixed(4);
-                row += "<td>"+P[i,j]+"</td>";
+                P[i,j] = Math.pow(Math.E,-L[j]) * (Math.pow(L[j],X[i]) / faktor(X[i]));
+                row += "<td>"+P[i,j].toFixed(4)+"</td>";
             }
             text += "<tr>"+row+"</tr>";
         }
