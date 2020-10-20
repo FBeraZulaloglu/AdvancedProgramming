@@ -1,0 +1,67 @@
+<html>
+    <body>
+        <pre>
+            <h1>Poisson Pobabilities</h1>
+        </pre>
+    
+        <table id="tablo"></table>
+    </body>
+</html>
+
+
+<script>
+"use strict";
+    poissonTable();
+    function faktor(a){
+        let result = 1;
+        
+        if(a > 1){
+            while(a != 1){
+                result *= a;
+                a--;
+            }
+        }
+        return result;
+    }
+
+    function makeRows(m, n) {   
+    let row = "<th></th>";
+    for (let j = 0; j <= n; j++) 
+        row += "<th>"+j+"</th>";
+    let text = "<tr>"+row+"</tr>";
+    for (let i = 0; i <= m; i++) {
+       row = "<th>"+i+"</th>";
+       for (let j = 0; j <= n; j++) {
+          row += "<td>"+i+","+j+"</td>";
+       }
+       text += "<tr>"+row+"</tr>";
+    }
+    tablo.innerHTML = text;
+    }
+
+    function poissonTable(){
+        const L = [0.5,1,1.5,2,2.5,3];
+        const X = [0,1,2,3,4,5,6,7,8];
+        const P = [];
+        let row = "<th></th>";
+        for(let j = 0; j< L.length;j++)
+        {
+            row += "<th>"+L[j]+"</th>";
+        }
+        
+        let text = "<tr>"+row+"</tr>";
+        for(let i=0;i<X.length;i++){
+
+            row = "<th>"+X[i]+"</th>";
+
+            for(let j=0;j<L.length;j++){
+                P[i,j] = Math.pow(Math.E,-L[j]) * (Math.pow(L[j],X[i]) / faktor(X[i])).toFixed(4);
+                row += "<td>"+P[i,j]+"</td>";
+            }
+            text += "<tr>"+row+"</tr>";
+        }
+        
+        tablo.innerHTML = text;
+        
+    }
+</script>
