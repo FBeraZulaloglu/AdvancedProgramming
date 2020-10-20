@@ -4,7 +4,7 @@
             <h1>Poisson Pobabilities</h1>
         </pre>
     
-        <table id="tablo"></table>
+        <table id="tablo" border="1" cellpadding="10"></table>
     </body>
 </html>
 
@@ -56,7 +56,7 @@
 
             for(let j=0;j<L.length;j++){
                 P[i,j] = Math.pow(Math.E,-L[j]) * (Math.pow(L[j],X[i]) / faktor(X[i]));
-                row += "<td>"+P[i,j].toFixed(4)+"</td>";
+                row += "<td>"+"  "+P[i,j].toFixed(4)+" "+"</td>";
             }
             text += "<tr>"+row+"</tr>";
         }
