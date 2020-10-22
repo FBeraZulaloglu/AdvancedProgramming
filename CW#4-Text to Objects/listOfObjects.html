@@ -63,30 +63,34 @@ function toList(str) {
     return a
 }
 const PLANET = 
-`Name	Diam	Mass	Radius	Period
-Mercury	0.382	0.06	0.40	0.24
-Venus	0.949	0.82	0.72	0.62
-Earth	1.000	1.00	1.00	1.00
-Mars	0.532	0.11	1.52	1.88
-Jupiter	11.209	317.80	5.20	11.86
-Saturn	9.449	95.20	9.54	29.46
-Uranus	4.007	14.60	19.22	84.01
-Neptune	3.883	17.20	30.06	164.80`,
+`channelname likes dislikes
+Kilimanjaro	115895 100
+Everest 218848	10
+Mount Fuji 23776	1100
+Vaalserberg	9323	12
+Denali  6123168	111
+Popocatepetl 546543	999
+Mont Blanc 499808	19																	
+`,
 
-MOUNT = `mountain	height	place
-Kilimanjaro	5895	Tanzania
-Everest 	8848	Nepal
-Mount Fuji	3776	Japan
-Vaalserberg	323	Netherlands
-Denali  	6168	United States
-Popocatepetl	5465	Mexico
-Mont Blanc	4808	Italy/France`
+MOUNT = `GölAdı\tKM\tÜLKE
+Hazar\t371000\tAzerbaycan
+Superror\t82100\tABD-Kanada
+Viktorya\t68800\tTanzanya-Uganda-Kenya
+Huron\t59600\tKanada-ABD
+Micgihan\t58000\tABD
+Baikal-Baykal\t31500\tRusya
+Great Bear  Lake\t31000\tKanada
+Malawi\t29500\tMalawi-Mozambik-Tanzanya
+Great Slave Lake\t27000\tKanada
+Erie\t25700\tKanada-ABD`
 
     title.innerText = document.title
     sample.innerText = toList
-    inp.value = PLANET
+    inp.value = MOUNT
     //toList()  //array of objects
 </script>
 
 </body>
 </html>
+
