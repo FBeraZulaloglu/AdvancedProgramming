@@ -28,7 +28,7 @@
 <h1>Soru 1.2</h1>
 <input id="event"></input>
 <button onclick="soru2()">GET ENTRİES</button>
-<p id="sonuc"></p>
+<p title="Result:" id="sonuc"></p>
 
 <h1>Soru 2</h1>
 <p>CM/INCH</p>
@@ -104,23 +104,29 @@ function soru1()
 }
 
 function soru2(){
-    
-    console.log(document.getElementById("event").value)
+    let search = (document.getElementById("event").value);
+    console.log(search);
+
     let w = new Map();
-    let number = 1;
+    let number = 0;
     for (let x of JOURNAL){
       for (let y of x.events){
-        if (y.includes("weekend") && y.includes(document.getElementById("event").value)){
-          //let n = m.get(y);
-          w.set(document.getElementById("event").value, number);
+        if (y.includes("weekend")){
           number++;
+          w.set(x.events, number);
         } 
       }
     }
-    console.log(number);
-    document.getElementById("sonuc").value = w.get(document.getElementById("event").value);
-    console.log(w.get(document.getElementById("event").value));
-
+    let result = 0;
+    w.forEach((values,keys) => {
+      for(let x of keys){
+        if(x == search){
+          result++;
+        }
+      }
+    });
+    console.log(w);
+    document.getElementById("sonuc").innerText = result.toString()+" adet "+search;
 }
 
 
