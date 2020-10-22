@@ -21,14 +21,19 @@
 <p><input type=file multiple onChange='fileSelect(this)' /></p>  
 <pre id=disp1></pre> <img id=disp2 />
 
+<h1>SORU 1.1</h1>
 <button onclick="soru1()">SORU 1</button>
-<h1>WORK VEYA WEEKEND OLAN JOURNALLAR</h1>
 <p id="allEntry"></p>
 
-<h1>Soru 2</h1>
-<input id="getEntry"></input>
+<h1>Soru 1.2</h1>
+<input id="event"></input>
 <button onclick="soru2()">GET ENTRİES</button>
 <p id="sonuc"></p>
+
+<h1>Soru 2</h1>
+<p>CM/INCH</p>
+<input id="cm" onchange="cmToInch()">
+<input id="inch" onchange="inchToCm()">
 
 
 <link  href="https://maeyler.github.io/JS/sss/inspector.css" rel="stylesheet">
@@ -56,6 +61,37 @@ class Chap4 extends Menu {
   }
 }
 
+class Converter{
+  constructor(cm=0) {
+    this.cm = cm;
+  }
+  get inch() {
+    return (this.cm / 2.54).toFixed(1);
+  }
+  set inch(value) {
+    this.cm = (value * 2.54).toFixed(1);
+  }
+  toString() {
+      return this.cm + " cm"
+  }
+  static fromInch(value) {
+    let t = new Convert();
+    t.inch = value;
+    return t;
+  }
+}
+
+function inchToCm(){
+  let c = new Converter(Number(cm.value));
+  c.inch = Number(inch.value);
+  cm.value = c.cm;
+}
+
+function cmToInch(){
+  let c = new Converter(Number(cm.value));
+  inch.value = c.inch;
+}
+
 function soru1()
 {
     for (let x of JOURNAL){
@@ -68,20 +104,22 @@ function soru1()
 }
 
 function soru2(){
-
-    let m = new Map();
+    
+    console.log(document.getElementById("event").value)
+    let w = new Map();
+    let number = 1;
     for (let x of JOURNAL){
-      n = 0;
       for (let y of x.events){
-        if (y.includes("weekend")){
+        if (y.includes("weekend") && y.includes(document.getElementById("event").value)){
           //let n = m.get(y);
-          m.set(y, x.events);
-          n+=1;
+          w.set(document.getElementById("event").value, number);
+          number++;
         } 
       }
     }
-
-    sonuc.innerText += m.get(getEntry.innerText);
+    console.log(number);
+    document.getElementById("sonuc").value = w.get(document.getElementById("event").value);
+    console.log(w.get(document.getElementById("event").value));
 
 }
 
