@@ -56,6 +56,7 @@ navigator.getBattery().then(b =>
 )
 navigator.geolocation.getCurrentPosition(x => loc.innerText = x.coords.latitude.toFixed(4)
 +","+x.coords.longitude.toFixed(4));
+check();
 }
     document.title = "TITLE"
     title.innerText = document.title;
