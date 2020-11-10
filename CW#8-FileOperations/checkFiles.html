@@ -15,7 +15,7 @@
 <p><b id=docName></b> &nbsp; <a href="Reading_files">Reference</a>
 </p>
 <p>Remote file <br>
-  <input type=text id=remote size=35 value="piano.png">
+  <input type=text id=remote size=35 value="https://fberazulaloglu.github.io/AdvancedProgramming/CW%238-FileOperations/piano.png">
 </p>
 <p><input type=file id=local multiple onChange='fileSelect()' /></p>  
 <pre id=out></pre>
@@ -25,6 +25,7 @@
 
 <script>
 "use strict";
+
 function fileSelect() {
     fetch(remote.value).then(r => r.blob())
     .then(checkFiles) //called with Blob b
