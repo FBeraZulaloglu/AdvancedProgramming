@@ -35,11 +35,13 @@ function checkFiles(b) {
     console.log(a);
     let equals = "";
     for (let f of a) {
+        out.innerText += f.name+" "
         if(b.type == f.type && f.size == b.size){      
             console.log("Eşit bulundu");
             equals += f.name+" "
         }
     }
+    out.innerText += "\n"
     if(equals == ""){
         out.innerText += 'Result :'+a.length+" items checked all files are different\n"
     }
