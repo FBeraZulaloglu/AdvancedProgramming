@@ -41,10 +41,11 @@ function checkFiles(b) {
         }
     }
     if(equals == ""){
-        out.innerText += 'Result :'+a.length+" items checked all files are different"
+        out.innerText += 'Result :'+a.length+" items checked all files are different\n"
     }
     else{
-        out.innerText += 'Result :'+a.length+" items checked "+equals+" is the same as "+remote.value
+        let x = remote.value.split("/")
+        out.innerText += 'Result :'+a.length+" items checked "+equals+" is the same as "+x[x.length-1]+"\n"
     }
 }
 const L = console.log
