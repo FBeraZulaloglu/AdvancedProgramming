@@ -34,7 +34,7 @@ function checkFiles(b) {
     console.log(a);
     let equals = "";
     for (let f of a) {
-        if(b.type == f.type || f.size == b.size){      
+        if(b.type == f.type && f.size == b.size){      
             console.log("Eşit bulundu");
             equals += f.name+" "
         }
