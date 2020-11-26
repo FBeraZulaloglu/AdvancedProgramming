@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="/305/images/icon192.png">
+    <title>EVENT LISTENERS</title>
+
+  <style> /* CSS comment */
+    body { max-width: 440px; }
+    #url { width: 190px; }
+    span, #url { color: blue; }
+  </style>
+</head>
+
+<body>   <!-- HTML comment: Modify all items marked xxx -->
+
+<h2 id=title title="Modify xxx"></h2>
+
+<p title="Battery level">
+  Battery level: <span id=level>?</span>
+<hr />
+
+<p title="Battery level">
+    Discharging Time: <span id=time>?</span>
+  <hr />
+
+<p title="Charging Status : ">
+    Charging Status : <span id=charge>?</span>
+  <hr />
+
+<p title="Online">
+    Wifi Connection: <span id=connection>?</span>
+  <hr />
+
+<p title="Keyboard">
+     <span id=key>?</span>
+  <hr />
+
+<b>Sample code</b>
+<pre id=sample>This text is not shown. Why?</pre>
+
+<hr />
+
+<script>
+"use strict";
+// JavaScript comment
+function init(){
+    navigator.getBattery().then(b =>{
+    charge.innerText = (b.charging ? "Charging" : "Discharging")
+    b.onchargingchange = function() {
+        charge.innerText = (b.charging ? "Charging" : "Discharging")
+        console.log(b.charging)
+    }
+
+    level.innerText = b.level*100+"%"
+    b.onlevelchange = function(){
+        level.innerText = b.level*100+"%"
+        console.log(b.charging)
+    }
+        let hour = b.dischargingTime/3600
+        time.innerText = hour.toFixed(2)+" hour remaining"
+    })
+    
+    connection.innerText = navigator.onLine ? "connected" : "disconnected"
+    ononline = event => connection.innerText = "connected"
+    onoffline = event => connection.innerText = "disconnected"
+    var keySet = new Set()
+    onkeydown = (event) =>{
+    keySet.add(event.key)
+    key.innerText = ""
+    for(let x of keySet){
+        key.innerText += x
+    }
+} 
+    onkeyup = (event) =>{
+        keySet.delete(event.key)
+        key.innerText = ""
+        for(let x of keySet){
+            key.innerText += x
+        }
+    }
+}
+
+init()
+title.innerText = document.title;
+sample.innerText = init+'\n';
+    
+</script>
+
+</body>
+</html>
