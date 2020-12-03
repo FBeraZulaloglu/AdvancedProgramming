@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" href="../images/icon192.png">
+  <title>GitHub Users</title>
+  <style>
+    body {
+        max-width: 440px;
+    }
+    img { 
+        width: 330px;
+        height: 330px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+<input type=text id=usr value=maeyler onChange="readUser()">
+<p id=out></p>
+<hr />
+<pre id=sample></pre>
+<hr />
+
+
+<script>
+"use strict";
+function error(t) {
+    out.style.color = 'red'
+    out.innerText = t; throw t
+}
+async function toJSON(url) {
+    let r = await fetch(url)
+    if (!r.ok) error(r.statusText)
+    return r.json()
+}
+async function readUser() {
+    const BR = "<BR>", 
+      URL = "https://api.github.com/users/"
+    let u = await toJSON(URL+usr.value)
+    if (!u || !u.login) 
+      error(usr.value+' not found')
+    //u.login is the same as usr.value
+    out.style.color = ''
+    out.innerHTML = ''
+    //start with a tiny image
+    let i = document.createElement("img")
+    i.src = u.avatar_url
+    i.align = "center"
+    out.appendChild(i)
+    //add name
+    let s = u.name
+    out.innerHTML += BR+s.bold()+BR; console.log(s)
+    //add login
+    let l = u.login
+    out.innerHTML += l+BR+BR; console.log(s)
+    //add company
+    let c = u.company
+    out.innerHTML += c+BR; console.log(u.company)
+    // add location
+    if (u.location) s = u.location
+    out.innerHTML += s+BR; console.log(s)
+    //blog
+    let b = document.createElement("a")
+    b.href = u.blog
+    b.target = "NewTab"
+    b.innerText = u.blog
+    console.log(u.blog)
+    out.appendChild(b)
+}
+    title.innerText = document.title
+    out.innerText = "Reading data"
+    readUser()
+</script>
+
+</body>
+</html>
