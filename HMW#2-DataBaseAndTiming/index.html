@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="/305/images/icon192.png">
+    <title>Student Database </title>
+
+  <style>
+    body { max-width: 440px; }
+    .link {
+        color: blue;
+        cursor: pointer;
+        font-style: italic;
+    }
+    .liste {
+        visibility: hidden;
+        font: 11px arial, sans-serif;
+        color: white;
+        background: blue;
+        cursor: text;
+        padding: 6px;
+        position: absolute;
+        height: 116px;
+        overflow-y: auto;
+    }
+    .link:hover .liste { 
+        visibility: visible; 
+    }
+  </style>
+</head>
+
+<body>
+
+<h2 id=title></h2>
+
+
+<button onClick='out.innerText=""'>Clear</button>
+<!-- #region  QUESTION 1-->
+<p>Student id: 
+<input id = "student_id" type=text>
+<button onClick='studentExamSchedule(student_id.value)'>Exam Schedule</button>
+
+<p>Course id: 
+<input id = "course_id" type=text value="">
+<button onClick='courseStudents(course_id.value)'>Student list</button>
+
+<p>Exam room: 
+<input id = "exam_id" type=text>
+<button onClick='examCourseList(exam_id.value)'>Course list</button>
+<button onClick='roomCoursesNumber(exam_id.value)'>Get Total</button><p>
+<label id= "totalCourseNumber">TOTAL COURSE NUMBER IN ROOM : </label> <p></p>
+
+<label>DATE : </label>
+<input id="date" type="text">
+<button onClick='extraQuery(date.value)'>GPA Avarage</button><pre></pre>
+<label id="avarage">GPA AVARAGE :</label>
+<pre></pre>
+<button onClick='question2()'>QUESTION 2</button>
+<!-- #endregion -->
+
+<p id=out onClick='doClick(event)'>Result:</p>
+
+<hr />
+<b>Sample code</b>
+<pre id=sample></pre>
+<hr />
+<script src="source.js"></script>
+</body>
+</html>
