@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="photos/recorder.png">
+    <link rel="manifest" href="manifest.json">
+    <script src="script.js" defer></script>
+    <title>DRUM PAD</title>
+</head>
+<body>
+
+    <img id="recorder" src="photos/recorder.png" class="microphone" 
+         width="50" height="120" onclick="record()">
+    
+    <div class="drum">
+        <div data-note="clap" class="box pad-1" >1</div>
+        <div data-note="crash" class="box pad-2">2</div>
+        <div data-note="hitHat" class="box pad-3">3</div>
+
+        <div data-note="snap" class="box pad-4">4</div>
+        <div data-note="snare" class="box pad-5">5</div>
+        <div data-note="ride" class="box pad-6">6</div>
+        
+        <div data-note="kick" class="box pad-7">7</div>
+        <div data-note="kick1" class="box pad-8">8</div>
+        <div data-note="kick2" class="box pad-9">9</div>
+    </div>
+
+    <audio id="clap" src="sounds/clap.wav"></audio>
+    <audio id="crash" src="sounds/crash.wav"></audio>
+    <audio id="hitHat" src="sounds/hiHat.wav"></audio>
+    <audio id="snap" src="sounds/snap.wav"></audio>
+    <audio id="snare" src="sounds/snare.wav"></audio>
+    <audio id="ride" src="sounds/ride.wav"></audio>
+    <audio id="kick" src="sounds/kick.wav"></audio>
+    <audio id="kick1" src="sounds/kick1.wav"></audio>
+    <audio id="kick2" src="sounds/kick2.wav"></audio>
+</body>
+</html>
