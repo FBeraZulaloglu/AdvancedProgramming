@@ -92,7 +92,7 @@ async function showFiles() {
     }
     exec.disabled = false; upload.disabled = false; exec.click()
 }
-async function removeFiles(fileId) {
+async function removeFile(fileId) {
     gapi.client.drive.files.delete({fileId}).then(execute,error)
 }
 // Make sure sign-in is complete before calling this method.
