@@ -18,6 +18,14 @@
         overflow-x: auto;
         line-height: 1.5;
     }
+    b{
+      padding: 3px;
+      border: 1px solid;
+      color: red;
+    }
+    b,u {
+      cursor: pointer;
+    }
   </style>
 
 </head>
@@ -38,6 +46,7 @@
 <button id=upload disabled onclick="button.click()">Upload</button>
 &nbsp;<span id=user></span>
 <pre id=out></pre>
+<pre id=data></pre>
 
 <script src="https://apis.google.com/js/api.js"></script>
 <script>
@@ -69,6 +78,10 @@ async function authenticate() {
     showFiles()
   } catch (e) { error(e) }
 }
+function displayFile(fileId) {
+    gapi.client.drive.files.get({fileId, alt:"media"})
+    .then(r => data.innerText = r.body,error)
+}
 async function showFiles() {
     const DRIVE = 
     "https://content.googleapis.com/discovery/v1/apis/drive/v3/rest"
@@ -78,7 +91,9 @@ async function showFiles() {
       log("GAPI client loaded")
     }
     exec.disabled = false; upload.disabled = false; exec.click()
-  
+}
+async function removeFiles(fileId) {
+    gapi.client.drive.files.delete({fileId}).then(execute,error)
 }
 // Make sure sign-in is complete before calling this method.
 function execute() {
@@ -98,12 +113,15 @@ function report(response) {
     let a = f.map(fileToString)
     out.innerHTML = a.join('\n'); console.log(f)
     files = f.map(x => x.id+' '+x.name)
+    data.innerText =''
 }
 function fileToString(x) {
     let [d, h, m] = x.modifiedTime.split(/[T:]/)
     let s = x.size.padStart(9) //padding with blanks
-    let a = '<a href='+x.webViewLink+' target=drive>'+x.name+'</a>'
-    return d+' '+h+':'+m+' '+s+'  '+a
+    //let a = '<a href='+x.webViewLink+' target=drive>'+x.name+'</a>'
+    let b = '<b id='+x.id+'>x</b>'
+    let u = '<u id='+x.id+'>'+x.name+'</b>'
+    return d+' '+h+':'+m+' '+b+'  '+u+' '+s+' '+a
 }
 function isText(f) {
     console.assert(f instanceof File);
@@ -154,7 +172,14 @@ async function init() {
     await gapi.auth2.init({ apiKey, clientId, scope })
     if (currentUser().getId()) try {
       showFiles()
-    } catch (e) { error(e) }  
+    } catch (e) { error(e) } 
+    out.onclick =(e)=> { 
+        let t = e.target;
+        if(!t || !t.id) return
+        if(t.tagName == 'B')
+            removeFile(t.id)
+        else displayFile(t.id)
+    } 
 }
 const ORIGIN = "https://fberazulaloglu.github.io"
 if (location.host.includes('github') && location.origin != ORIGIN)
