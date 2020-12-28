@@ -105,10 +105,10 @@ function addSound(pad,row,column){
         pad.dataset.note = "snare"+column.toString()
     }
     else if(row == 5){
-        pad.dataset.note = "kick"+(column+1).toString()
+        pad.dataset.note = "kick"+column.toString()
     }
     else if(row == 6){
-        pad.dataset.note = "hihat"+(column+1).toString()
+        pad.dataset.note = "hihat"+column.toString()
     }
 }
 
@@ -126,7 +126,7 @@ function playDrum(key){
 
 function addAnimationToPads(keyPad){
     keyPadColor = {background : ["yellow,green,cyan,magneta,yellow"]}
-    keyPad.animate({ background: ["yellow", "cyan"] }, 1000)
+    keyPad.animate({ background: ["yellow", "cyan"] }, 500)
 }
 
 //#region  Record and Save Audio
@@ -188,17 +188,5 @@ function saveRecording(mediaRecorder){
     }
 }
 
-
-
-async function registerServiceWorker(){
-    if('serviceWorker' in navigator){
-        try{
-            await navigator.serviceWorker.register('sw.js')
-        }
-        catch(e){
-            console.log("Service worker registration has failed")
-        }
-    }
-}
 
 //#endregion 

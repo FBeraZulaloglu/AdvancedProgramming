@@ -4,7 +4,8 @@
 
 html,body
 {
-    background: linear-gradient(to right , #5D6462, #930B93);
+    background: linear-gradient(to right , #5D6462, #524f52);
+    background-image: url("photos/backgroundImage.jpg");
     height: 100%;
     width: 100%;
     display: flex;
@@ -105,23 +106,20 @@ html,body
   }
 
   button {
+    position: justify;
     width: 35px;
     height: 35px;
     font-size: 0;
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(121, 9, 9);
     border: 0;
     border-radius: 35px;
-    margin: 18px;
     outline: none;
-    align-items: left;
+    transform: translate(450%,130%);
   }
 
-  .select-box{
-    width: 70px;
-  }
   
   .notRec{
-    background-color: rgb(29, 28, 28);
+    background-color: rgb(122, 7, 7);
   }
   
   .Rec{
@@ -141,4 +139,45 @@ html,body
     90%{
       box-shadow: 0px 0px 5px 13px rgba(5, 5, 5, 0.849);
     }
+  }
+
+  .combo-box {
+    position: justify;
+    transform: translate(-30%,0%);
+  }
+  
+  .combo-box select {
+    background-color: #1a1c1d;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    appearance: button;
+    outline: none;
+  }
+  
+  .combo-box::before {
+    font-family: cursive;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  .combo-box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .combo-box select option {
+    padding: 10px;
   }

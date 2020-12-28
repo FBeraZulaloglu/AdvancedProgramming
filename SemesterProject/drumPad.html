@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="photos/backgroundImage.jpg">
-    <link rel="manifest" href="manifest.json">
     <script src="script.js" defer></script>
     <title>DRUM PAD</title>
 </head>
@@ -13,13 +12,14 @@
 
     <button id="recordButton" onclick="record()">Not Recording</button>
     
+    <div class="combo-box">
     <select id="padSize" class="select-box" onchange="sizeChanged()">
         <option value="3">3X3</option>
         <option value="4">4X3</option>
         <option value="5">5X3</option>
         <option value="6">6X3</option>
     </select>
-
+    </div>
     <table id="table" class="table">
         
     </table>
