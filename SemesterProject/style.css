@@ -23,16 +23,17 @@ html,body
 
 .box{
     border-radius: 10%;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     margin: 12px 1px;
     box-shadow: 0 10px 6px -6px black;
     background-color: #444;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
-    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px black;
 }
 
 .tBox{
@@ -53,7 +54,6 @@ html,body
 }
 
 .table{
-  width: 40%;
   justify-content: left;
 }
 .box.active {
@@ -83,8 +83,25 @@ html,body
     border: 2px solid #bc4b1e;  
   }
   .pad-title{
+    border-radius: 10%;
+    width: 80px;
+    height: 80px;
+    margin: 12px 1px;
+    box-shadow: 0 10px 6px -6px black;
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
     background-color:rgb(24, 24, 24);
     border: 2px solid #fffefe;
+  }
+
+  .text-title{
+    color: rgb(255, 246, 255);
+    text-shadow: 2px 1px rgb(99, 3, 94) ;
+    font-family: cursive;
+    font-size: 16px;
   }
 
   button {

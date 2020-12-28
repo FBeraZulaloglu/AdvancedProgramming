@@ -21,22 +21,24 @@ function tableCreate(){
         tr.className = "tRow"
         
         let content = document.createElement('td')
-        var div_title=content.appendChild(document.createElement('div'))
-        div_title.className = "box pad-title"
+        let padType= content.appendChild(document.createElement('div'))
+        padType.className = "pad-title"
+        let title = document.createElement('h3')
+        title.className = "text-title"
         content.className = "tBox"
-        let text = decideContent(div_title,i);
-        div_title.textContent = text
+        let text = decideContent(padType,i);
+        title.textContent = text
+        padType.appendChild(title)
         tr.appendChild(content)
         
         for(let j=1; j<=3;j++)
         {
             var td = document.createElement('td')
             td.className = "tBox"
-            var div_1=td.appendChild(document.createElement('div'))
-            div_1.className = "box pad-"+i.toString();
-            //div_1.data.  ('data-note', 'snare');
+            let pad=td.appendChild(document.createElement('div'))
+            pad.className = "box pad-"+i.toString();
             
-            addSound(div_1,i,j)
+            addSound(pad,i,j)
             tr.appendChild(td)
         }
         document.getElementById("table").appendChild(tr);
