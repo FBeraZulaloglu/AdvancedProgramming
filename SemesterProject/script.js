@@ -1,13 +1,116 @@
-registerServiceWorker() // to get the chache data
+//registerServiceWorker() // to get the chache data
+// First create table
+let size = 3; // default size
+tableCreate();
 
-const keys = document.querySelectorAll('.box');
+let keys = document.querySelectorAll('.box');
+console.log(keys)
 var isRecording = false;
 
+const audioChunks = [] // to get the audio after finish recording
+document.getElementById("recordButton").className = "notRec"
+document.getElementById("table")
 keys.forEach(key =>{
     key.addEventListener('click',() => playDrum(key))
 })
 
+function tableCreate(){
+
+    for(let i=1; i<= size;i++){
+        var tr = document.createElement('tr');
+        tr.className = "tRow"
+        
+        let content = document.createElement('td')
+        var div_title=content.appendChild(document.createElement('div'))
+        div_title.className = "box pad-title"
+        content.className = "tBox"
+        let text = decideContent(div_title,i);
+        div_title.textContent = text
+        tr.appendChild(content)
+        
+        for(let j=1; j<=3;j++)
+        {
+            var td = document.createElement('td')
+            td.className = "tBox"
+            var div_1=td.appendChild(document.createElement('div'))
+            div_1.className = "box pad-"+(i+1).toString();
+            //div_1.data.  ('data-note', 'snare');
+            
+            addSound(div_1,i,j)
+            tr.appendChild(td)
+        }
+        document.getElementById("table").appendChild(tr);
+    }
+}
+
+function decideContent(div,number){
+    if(number == 1){
+        div.style.backgroundImage = "url(photos/drumElements/kick.jpg)";
+        return "KICK";
+    }
+    else if(number == 2){
+        div.style.backgroundImage = "url(photos/drumElements/snap.jpg)";
+        return "SNAP";
+    }
+    else if(number == 3){
+        div.style.backgroundImage = "url(photos/drumElements/crash.png)";
+        return "SNARE";
+    }
+    else if(number == 4){
+        return "CLAP";
+    }
+    else if(number == 5){
+      div.style.backgroundImage = "url(photos/drumElements/ride.jpg)";
+      return "RIDE";  
+    }
+    else if(number == 6){
+        div.style.backgroundImage = "url(photos/drumElements/crash.png)";
+        return "CRASH";
+    }
+    else{
+        console.log("title couldnt added")
+    }
+}
+
+function sizeChanged(){
+    var e = document.getElementById("padSize");
+    size = parseInt(e.value);
+    console.log(size);
+    console.log(typeof(size))
+    var Table = document.getElementById("table");
+    Table.innerHTML = "";
+    tableCreate();
+    // update keys
+    keys = document.querySelectorAll('.box');
+    keys.forEach(key =>{
+        key.addEventListener('click',() => playDrum(key))
+    })
+    // update keys
+}
+
+function addSound(pad,row,column){
+    if(row == 1){
+        pad.dataset.note = "kick"+(column).toString()
+    }
+    else if(row == 2){
+        pad.dataset.note = "snap"+column.toString()
+    }
+    else if(row == 3){
+        pad.dataset.note = "ride"+column.toString()
+    }
+    else if(row == 4){
+        pad.dataset.note = "clap"+column.toString()
+    }
+    else if(row == 5){
+        pad.dataset.note = "ride"+(column+1).toString()
+    }
+    else if(row == 6){
+        pad.dataset.note = "crash"+(column+1).toString()
+    }
+}
+
 function playDrum(key){
+    console.log("key pressed:");
     addAnimationToPads(key)
     const audio = document.getElementById(key.dataset.note)
     audio.currentTime = 0
@@ -23,6 +126,7 @@ function addAnimationToPads(keyPad){
     keyPad.animate({ background: ["yellow", "cyan"] }, 1000)
 }
 
+//#region  Record and Save Audio
 function record(){
     if(navigator.mediaDevices){
         let mediaRecorder;
@@ -31,14 +135,22 @@ function record(){
             mediaRecorder = new MediaRecorder(stream);
 
             if(!isRecording){
-                recorder.animate({ background: ["yellow", "cyan"] }, 1000)
                 console.log(mediaRecorder)
                 startRecording(mediaRecorder)
                 isRecording = true
+                console.log("KAYIT SONRASI BİLGİSİ")
+                console.log(mediaRecorder)
             }
             else{
-                stopRecording(mediaRecorder)
+                document.getElementById("recordButton").classList.remove("Rec");
+                document.getElementById("recordButton").classList.add("notRec")
                 isRecording = false
+
+                
+                const audioBlob = new Blob(audioChunks);
+                const audioUrl = URL.createObjectURL(audioBlob);
+                const audio = new Audio(audioUrl);
+                const play = () => audio.play();
             }
 
         });
@@ -46,20 +158,24 @@ function record(){
 }
 
 function startRecording(mediaRecorder){
-    
     mediaRecorder.start()
+    document.getElementById("recordButton").classList.remove("notRec");
+    document.getElementById("recordButton").classList.add("Rec")
+    console.log("START RECORDING :");
     console.log(mediaRecorder.state)
-    const audioChunks = []
+    
     mediaRecorder.addEventListener("dataavailable", event => {
       audioChunks.push(event.data)
     });
 }
 
 function stopRecording(mediaRecorder){
-    if(mediaRecorder.state == "recording"){
-        mediaRecorder.stop();
-        saveRecording()
-    }
+    
+    mediaRecorder.stop();
+    document.getElementById("recordButton").classList.remove("Rec");
+    document.getElementById("recordButton").classList.add("notRec")
+    saveRecording()
+    
     console.log(mediaRecorder.state)
 }
 
@@ -68,6 +184,8 @@ function saveRecording(mediaRecorder){
         // ask to user save recording
     }
 }
+
+
 
 async function registerServiceWorker(){
     if('serviceWorker' in navigator){
@@ -79,3 +197,5 @@ async function registerServiceWorker(){
         }
     }
 }
+
+//#endregion 
