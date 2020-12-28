@@ -53,7 +53,8 @@ html,body
 }
 
 .table{
-  width: 60%;
+  width: 40%;
+  justify-content: left;
 }
 .box.active {
     background-color: darken(#444, 10%);

@@ -33,7 +33,7 @@ function tableCreate(){
             var td = document.createElement('td')
             td.className = "tBox"
             var div_1=td.appendChild(document.createElement('div'))
-            div_1.className = "box pad-"+(i+1).toString();
+            div_1.className = "box pad-"+i.toString();
             //div_1.data.  ('data-note', 'snare');
             
             addSound(div_1,i,j)
