@@ -45,27 +45,28 @@ function tableCreate(){
 
 function decideContent(div,number){
     if(number == 1){
-        div.style.backgroundImage = "url(photos/drumElements/kick.jpg)";
-        return "KICK";
+        div.style.backgroundImage = "url(photos/drumElements/melody.png)";
+        return "MELODY";
     }
     else if(number == 2){
-        div.style.backgroundImage = "url(photos/drumElements/snap.jpg)";
-        return "SNAP";
-    }
-    else if(number == 3){
-        div.style.backgroundImage = "url(photos/drumElements/crash.png)";
-        return "SNARE";
-    }
-    else if(number == 4){
+        div.style.backgroundImage = "url(photos/drumElements/clap.png)";
         return "CLAP";
     }
+    else if(number == 3){
+        div.style.backgroundImage = "url(photos/drumElements/ride.png)";
+        return "RIDE";
+    }
+    else if(number == 4){
+        div.style.backgroundImage = "url(photos/drumElements/snare.jpg)";
+        return "SNARE";
+    }
     else if(number == 5){
-      div.style.backgroundImage = "url(photos/drumElements/ride.jpg)";
-      return "RIDE";  
+      div.style.backgroundImage = "url(photos/drumElements/kick.jpg)";
+      return "KICK";  
     }
     else if(number == 6){
-        div.style.backgroundImage = "url(photos/drumElements/crash.png)";
-        return "CRASH";
+        div.style.backgroundImage = "url(photos/drumElements/hihat.jpg)";
+        return "HI HAT";
     }
     else{
         console.log("title couldnt added")
@@ -90,22 +91,22 @@ function sizeChanged(){
 
 function addSound(pad,row,column){
     if(row == 1){
-        pad.dataset.note = "kick"+(column).toString()
+        pad.dataset.note = "melodi"+(column).toString()
     }
     else if(row == 2){
-        pad.dataset.note = "snap"+column.toString()
+        pad.dataset.note = "clap"+column.toString()
     }
     else if(row == 3){
         pad.dataset.note = "ride"+column.toString()
     }
     else if(row == 4){
-        pad.dataset.note = "clap"+column.toString()
+        pad.dataset.note = "snare"+column.toString()
     }
     else if(row == 5){
-        pad.dataset.note = "ride"+(column+1).toString()
+        pad.dataset.note = "kick"+(column+1).toString()
     }
     else if(row == 6){
-        pad.dataset.note = "crash"+(column+1).toString()
+        pad.dataset.note = "hihat"+(column+1).toString()
     }
 }
 
