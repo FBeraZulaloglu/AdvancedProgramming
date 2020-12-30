@@ -28,7 +28,7 @@ html,body
     height: 80px;
     margin: 12px 1px;
     box-shadow: 0 10px 6px -6px black;
-    background-color: #444;
+    background-color: rgb(41, 40, 40);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,27 +61,37 @@ html,body
     background-color: darken(#444, 10%);
     transform: scale(1.1);
     transition: all .1s;
+    animation-name: playing;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
   }
 
   .pad-1 { 
-    border: 2px solid #09CCE3; 
+    --pad-color : solid #09CCE3;
+    border: 2px var(--pad-color); 
   }
 
   .pad-2{ 
-    border: 2px solid #E3DC09; 
+    --pad-color : solid #E3DC09;
+    border: 2px var(--pad-color); 
   }
 
   .pad-3{ 
-    border: 2px solid #1EBC80;  
+    --pad-color : solid #0d3a81;
+    border: 2px var(--pad-color);  
   }
   .pad-4{ 
-    border: 2px solid #1ea4bc;  
+    --pad-color : solid #1ebc6d;
+    border: 2px var(--pad-color);  
   }
   .pad-5{ 
-    border: 2px solid #bc1e4d;  
+    --pad-color : solid #bc1e4d;
+    border: 2px var(--pad-color);  
   }
   .pad-6{ 
-    border: 2px solid #bc4b1e;  
+    --pad-color : solid #bc4b1e;
+    border: 2px var(--pad-color) ;  
   }
   .pad-title{
     border-radius: 10%;
@@ -98,6 +108,7 @@ html,body
     border: 2px solid #fffefe;
   }
 
+
   .text-title{
     color: rgb(255, 246, 255);
     text-shadow: 2px 1px rgb(99, 3, 94) ;
@@ -107,19 +118,34 @@ html,body
 
   button {
     position: justify;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     font-size: 0;
     background-color: rgb(121, 9, 9);
     border: 0;
-    border-radius: 35px;
+    border-radius: 10px;
     outline: none;
-    transform: translate(450%,130%);
+    font-size: 9px;
+    color: white;
   }
 
+  .startedPlay{
+    background-color: rgb(10, 77, 30);
+    animation-name: listening;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: translate(210%,210%);
+    
+  }
+  .stoppedPlay{
+    background-color: rgb(10, 77, 30);
+    transform: translate(210%,210%);
+  }
   
   .notRec{
     background-color: rgb(122, 7, 7);
+    transform: translate(320%,110%);
   }
   
   .Rec{
@@ -127,6 +153,16 @@ html,body
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    transform: translate(320%,110%);
+  }
+
+  .pause-button{
+    background-color: rgb(75, 6, 82);
+    transform: translate(100%,310%);
+  }
+
+  .pause-button-hide{
+    display: none;
   }
   
   @keyframes pulse{
@@ -141,18 +177,42 @@ html,body
     }
   }
 
+  @keyframes playing{
+    0%{
+      box-shadow: 0px 0px 3px 0px rgba(112, 7, 131, 0.849);
+    }
+    65%{
+      box-shadow: 0px 0px 3px 5px rgba(80, 42, 78, 0.849);
+    }
+    90%{
+      box-shadow: 0px 0px 3px 8px rgba(255, 255, 255, 0.849);
+    }
+  }
+
+  @keyframes listening{
+    0%{
+      box-shadow: 0px 0px 3px 0px rgba(10, 196, 41, 0.849);
+    }
+    65%{
+      box-shadow: 0px 0px 3px 5px rgba(12, 133, 96, 0.849);
+    }
+    90%{
+      box-shadow: 0px 0px 3px 8px rgb(255, 255, 255);
+    }
+  }
+
   .combo-box {
     position: justify;
-    transform: translate(-30%,0%);
+    transform: translate(-85%,0%);
   }
   
   .combo-box select {
     background-color: #1a1c1d;
     color: white;
     padding: 12px;
-    width: 250px;
+    width: 150px;
     border: none;
-    font-size: 20px;
+    font-size: 25px;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
     appearance: button;
     outline: none;
@@ -180,4 +240,32 @@ html,body
   
   .combo-box select option {
     padding: 10px;
+  }
+
+  h1 {
+    color: #e91e63;
+    font-size: 60px ;  
+    font-weight: 900;
+    text-shadow: 1px 1px white; 
+  }
+
+  pr {
+    color: #f6f6f6;
+    font-size: 40px ;  
+    font-weight: 900;
+    text-shadow: none; 
+  }
+
+  h3 {
+    color: #ffffff;
+    font-size: 20px ;  
+    font-weight: 900;
+    text-shadow: none; 
+  }
+
+  .start-button{
+    background-color: #5a0648;
+    height: 70px;
+    width: 100px;
+    border-radius: 20px;
   }

@@ -10,7 +10,9 @@
 </head>
 <body>
 
-    <button id="recordButton" onclick="record()">Not Recording</button>
+    <button id="pauseButton" class="pause-button" onclick="pause()">PAUSE</button>
+    <button id="playButton" onclick="playSong()">PLAY</button>
+    <button id="recordButton" onclick="controlRecording()">REC</button>
     
     <div class="combo-box">
     <select id="padSize" class="select-box" onchange="sizeChanged()">

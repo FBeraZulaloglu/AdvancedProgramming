@@ -3,16 +3,26 @@
 let size = 3; // default size
 tableCreate();
 
+let audio
+let start_time // recording start time
+let notes = [] // notes array that will keep the pushed drum pad nodes
 let keys = document.querySelectorAll('.box');
-console.log(keys)
-var isRecording = false;
-
+var isRecording = false
+var isPlaying = false
+let mediaRecorder;
 const audioChunks = [] // to get the audio after finish recording
+document.getElementById("pauseButton").className = "pause-button-hide"
 document.getElementById("recordButton").className = "notRec"
-document.getElementById("table")
+document.getElementById("playButton").className = "stoppedPlay"
+
 keys.forEach(key =>{
     key.addEventListener('click',() => playDrum(key))
 })
+
+const keyMap = [...keys].reduce((map, key) =>{
+    map[key.dataset.note] = key
+    return map
+},{})
 
 function tableCreate(){
 
@@ -113,80 +123,73 @@ function addSound(pad,row,column){
 }
 
 function playDrum(key){
-    console.log("key pressed:");
-    addAnimationToPads(key)
-    const audio = document.getElementById(key.dataset.note)
+    if(isRecording) record(key.dataset.note)
+    isPlaying = true
+    audio = document.getElementById(key.dataset.note)
     audio.currentTime = 0
     audio.play()
     key.classList.add('active')
     audio.addEventListener('ended', ()=>{
         key.classList.remove('active')
     })
-}
-
-function addAnimationToPads(keyPad){
-    keyPadColor = {background : ["yellow,green,cyan,magneta,yellow"]}
-    keyPad.animate({ background: ["yellow", "cyan"] }, 500)
+    audio.addEventListener('pause', ()=>{
+        key.classList.remove('active')
+    })
 }
 
 //#region  Record and Save Audio
-function record(){
-    if(navigator.mediaDevices){
-        let mediaRecorder;
-        navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(stream => {
-            mediaRecorder = new MediaRecorder(stream);
-
-            if(!isRecording){
-                console.log(mediaRecorder)
-                startRecording(mediaRecorder)
-                isRecording = true
-                console.log("KAYIT SONRASI BİLGİSİ")
-                console.log(mediaRecorder)
-            }
-            else{
-                document.getElementById("recordButton").classList.remove("Rec");
-                document.getElementById("recordButton").classList.add("notRec")
-                isRecording = false
-
-                
-                const audioBlob = new Blob(audioChunks);
-                const audioUrl = URL.createObjectURL(audioBlob);
-                const audio = new Audio(audioUrl);
-                const play = () => audio.play();
-            }
-
-        });
+function controlRecording(){
+    if(isRecording == false){
+        isRecording = true
+        document.getElementById("pauseButton").classList.remove("pause-button-hide")
+        document.getElementById("pauseButton").classList.add("pause-button")
+        startRecording()
+    }
+    else{
+        document.getElementById("pauseButton").classList.remove("pause-button")
+        document.getElementById("pauseButton").classList.add("pause-button-hide")
+        isRecording = false
+        stopRecording()
     }
 }
 
-function startRecording(mediaRecorder){
-    mediaRecorder.start()
-    document.getElementById("recordButton").classList.remove("notRec");
+function startRecording(){
+    start_time = Date.now();
+    notes = []
+    console.log(notes)
+    document.getElementById("recordButton").classList.remove("notRec")
     document.getElementById("recordButton").classList.add("Rec")
-    console.log("START RECORDING :");
-    console.log(mediaRecorder.state)
-    
-    mediaRecorder.addEventListener("dataavailable", event => {
-      audioChunks.push(event.data)
-    });
 }
 
-function stopRecording(mediaRecorder){
-    
-    mediaRecorder.stop();
+function stopRecording(){
     document.getElementById("recordButton").classList.remove("Rec");
     document.getElementById("recordButton").classList.add("notRec")
-    saveRecording()
-    
-    console.log(mediaRecorder.state)
 }
 
-function saveRecording(mediaRecorder){
-    if(mediaRecorder.state == "recording"){
-        // ask to user save recording
+function pause(){
+    if(isPlaying == true){
+        audio.pause()
+        audio.currentTime = 0
+        document.getElementById("recordButton").className = "notRec"
     }
+       
 }
 
+function record(note){
+    notes.push({
+        key:note, 
+        startTime : Date.now()-start_time
+    })
+}
+
+function playSong(){
+    if(notes.length==0) return;
+    console.log(notes)
+    notes.forEach(note =>{
+        setTimeout(()=>{
+            playDrum(keyMap[note.key])
+        },note.startTime)
+    })
+}
 
 //#endregion 
