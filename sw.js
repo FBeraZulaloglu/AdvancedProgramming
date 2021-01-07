@@ -9,8 +9,9 @@ function save(req, resp) {
      return resp;
   return caches.open(CACHE)
   .then(cache => { // save request
-    if(resp.status==200)
+    if(resp.status==200){
       cache.put(req, resp.clone());
+    }
     return resp;
   }) 
   .catch(console.err)
